@@ -22,7 +22,7 @@ public class SalesPerYear {
         double commission = 0;
         double earnings = 30000;
 
-        // basic salary is 5000 
+        // minimum sales amount is 0.01 
         double SalesAmount = 0.1;
         
 
@@ -48,7 +48,7 @@ public class SalesPerYear {
         } while (commission < earnings);
 
         // displaying no of sales that took to earn 30000 and the sales amount as well
-        System.out.println("Sales Amount is:" + SalesAmount);
+        System.out.println("minimum No of Sales  is:" + SalesAmount);
 
        
 
