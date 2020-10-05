@@ -19,30 +19,22 @@ public class CrediCardPatterns {
      */
     public static boolean isValid(long number) {
 // getting first digit of credit card number
-        long v = getPrefix(number, 1);
-       // checking condition if credit card number starting digit <4 
-        if (v < 4) {
 
-            return false;
-        }
-        //checking condition if credit card number starting digit >6 & not equal to 37 
-        else if (v > 6 && getPrefix(number, 2) != 37) {
+        // checking condition if credit card number starting digit <4 
+        if (prefixMatched(number, 4) || prefixMatched(number, 5) || prefixMatched(number, 6) || prefixMatched(number, 37)) {
 
-            return false;
+            // checking if card number length should not be  <13 and > 16 
+            if (getSize(number) >= 13 && getSize(number) <= 16) {
 
-        } 
-        // checking if card number length should not be  <13 and > 16 
-        else if (getSize(number) < 13 || getSize(number) > 16) {
+                // checking condition if sum of even place digits and odd place digits should be divided by 10 
+                if ((sumOfDoubleEvenPlace(number) + sumOfOddPlace(number)) % 10 == 0) {
 
-            return false;
-        }
-        // checking condition if sum of even place digits and odd place digits should be divided by 10 
-        else if ((sumOfDoubleEvenPlace(number) + sumOfOddPlace(number)) % 10 != 0) {
-
-            return false;
+                    return true;
+                }
+            }
         }
 
-        return true;
+        return false;
     }
 
     /**
@@ -53,14 +45,16 @@ public class CrediCardPatterns {
      */
     public static int sumOfDoubleEvenPlace(long number) {
         int sumOfDoubleEvenPlace = 0;
-// caslculating sum of even place digits sum 
-        for (int i = 0; i < 16; i++) {
-          // checking if the digit is divided by 2 
-          if (i % 2 == 0) {
-                sumOfDoubleEvenPlace = sumOfDoubleEvenPlace + getDigit((int) (number % 10) * 2);
-                number = number / 10;
 
-            }
+        String str = number + "";
+        // calculating sum of even place digits sum 
+        int i = getSize(number) - 2;
+        int count;
+        while (i >= 0) {
+            count = getDigit(Integer.parseInt(str.charAt(i) + "") * 2);
+            sumOfDoubleEvenPlace = sumOfDoubleEvenPlace + count;
+            i = i - 2;
+
         }
 
         return sumOfDoubleEvenPlace;
@@ -74,12 +68,11 @@ public class CrediCardPatterns {
      * @return
      */
     public static int getDigit(int number) {
-      // checking if the given number is <10 or not 
-      if (number < 10) {
+        // checking if the given number is <10 or not 
+        if (number < 10) {
             return number;
-        } 
-      //checking if it is not <10 and calculating sum of two digits in number 
-      else {
+        } //checking if it is not <10 and calculating sum of two digits in number 
+        else {
             int sum = 0;
 
             while (number != 0) {
@@ -100,14 +93,18 @@ public class CrediCardPatterns {
      */
     public static int sumOfOddPlace(long number) {
         int sumOfOddPlace = 0;
-       // calculating sum of even place digits
-        for (int i = 1; i <= 16; i++) {
-      // checking if digit is not divided by 2 then it is odd number
-       if (i % 2 == 1) {
-                sumOfOddPlace = sumOfOddPlace + (int) (number % 10);
-            }
-            number = number / 10;
+        // calculating sum of even place digits
+        String str = number + "";
+        // calculating sum of even place digits sum 
+        int i = getSize(number) - 1;
+        int count;
+        while (i >= 0) {
+            count = getDigit(Integer.parseInt(str.charAt(i) + ""));
+            sumOfOddPlace = sumOfOddPlace + count;
+            i = i - 2;
+
         }
+
         return sumOfOddPlace;
 
     }
@@ -119,14 +116,11 @@ public class CrediCardPatterns {
      * @param d
      * @return
      */
-    public static boolean prefixMatched(long number, int d) 
-    {
-       //checking that the given number perfeix matching with the passed second parameter value
-        if (getPrefix(number, 1) == d || getPrefix(number, 2) == d) {
+    public static boolean prefixMatched(long number, int d) {
+        if (getPrefix(number, getSize(d)) == d) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
 // return the number of digits in d
@@ -138,30 +132,34 @@ public class CrediCardPatterns {
     public static int getSize(long d) {
 
         int n = 0;
-        
-     // checking the length of the card number    
+
+        // checking the length of the card number    
         while (d != 0) {
             n++;
             d = d / 10;
         }
+
         return n;
+
     }
 
     /**
-     * * Return the first k number of digits from number.If the number of digits
-     * in number is less than k, return number.
+     * * Return the first k number of digits from number.If the number of
+     * digits in number is less than k, return number.
      *
      * @param number
      * @param k
      * @return
      */
     public static long getPrefix(long number, int k) {
-       //checking the number to get   first digit and second digit
-       if (k == 1) {
-            return number / 1000000000000000L;
-        } else if (k == 2) {
-            return number / 100000000000000L;
+        //checking the number to get   first digit and second digit
+        int size = getSize(number);
+        if (size > k) {
+            String str = Long.toString(number);
+            number = Long.parseLong(str.substring(0, k));
+            return number;
         }
-        return 0;
+        return number;
+
     }
 }

@@ -5,6 +5,7 @@
  */
 package question07;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -21,20 +22,27 @@ public class DistanceBetweenTwoPoints {
 
         Scanner scan = new Scanner(System.in);
     //scanning x points and y points 
-        System.out.print("Enter point 1 (latitude and longitude) in degrees:");
-        double x1 = scan.nextDouble();
-        double y1 = scan.nextDouble();
-        scan.nextLine();
-        System.out.print("Enter point 2 (latitude and longitude) in degrees:");
-        double x2 = scan.nextDouble();
-        double y2 = scan.nextDouble();
+        System.out.print("Enter point 1 (latitude and longitude) in degrees: ");
+        String A=scan.nextLine();
+        String[]  resX=A.split(", ");
+        double x1 = Double.parseDouble(resX[0]);
+        
+        double y1 = Double.parseDouble(resX[1]);
+        
+        System.out.print("Enter point 2 (latitude and longitude) in degrees: ");
+        String B=scan.nextLine();
+        String[]  resY=B.split(", ");
+        double x2 = Double.parseDouble(resY[0]);
+        
+        double y2 = Double.parseDouble(resY[1]);
+        
 
         // formula to calculate distance between the given points
         double distance = 6371.01 * Math.acos(Math.sin(Math.toRadians(x1)) * Math.sin(Math.toRadians(x2))
                 + Math.cos(Math.toRadians(x1)) * Math.cos(Math.toRadians(x2))
                 * Math.cos(Math.toRadians(y1) - Math.toRadians(y2)));
 
-        System.out.println(distance+"Km");
+        System.out.println("The distance between the two points is  " +distance+" Km");
 
     }
 

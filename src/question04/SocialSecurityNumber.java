@@ -26,7 +26,7 @@ public class SocialSecurityNumber {
         System.out.print("Enetr a SSN :");
         SSN = scan.nextLine();
         // using if condition to check the length of SSN number and the special characters '-' at specific index
-        if (SSN.length() == 11&&(SSN.charAt(3) == '-' || SSN.charAt(6) == '-') )
+        if (SSN.length() == 11&&(SSN.charAt(3) == '-' && SSN.charAt(6) == '-') )
         {
            
             // using loop to check  for all the characters in the given number 

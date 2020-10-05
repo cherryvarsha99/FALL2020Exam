@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author S540114
+ * @author sai varsha vellanki
  */
 public class SalesPerYear {
 
@@ -23,7 +23,7 @@ public class SalesPerYear {
         double earnings = 30000;
 
         // minimum sales amount is 0.01 
-        double SalesAmount = 0.1;
+        double SalesAmount = 0.0;
         
 
         // using do- while  to calculate commission   

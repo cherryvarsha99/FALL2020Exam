@@ -97,7 +97,7 @@ public class Fan {
             return "Fan Details: " + "   Fan Speed: " + getSpeed() + "   Fan Radius: " + getRadius() + "   Fan Color: " + getColor();
 
         } else {
-            return "Fan is off: " + "   Fan Speed: " + getSpeed() + "   Fan Radius: " + getRadius() + "   Fan Color: " + getColor();
+            return "Fan is off: "+"   Fan Radius: " + getRadius() + "   Fan Color: " + getColor();
         }
     }
 
